@@ -1,0 +1,138 @@
+# Project: XenDemo
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = ../../bin/About.o ../../bin/Barrel.o ../../bin/BgWall.o ../../bin/CargoBox.o ../../bin/Claw.o ../../bin/ClawWeapon.o ../../bin/Column.o ../../bin/Contacts.o ../../bin/Defender.o ../../bin/EdgeWall.o ../../bin/EnemyWeapon.o ../../bin/Explosion.o ../../bin/FullScreenFX.o ../../bin/Hud.o ../../bin/Intro.o ../../bin/LaserCollisonFX.o ../../bin/LaserGate.o ../../bin/MoleculerDecomposer.o ../../bin/NeonItems.o ../../bin/ObjParticle.o ../../bin/Phys.o ../../bin/Resources.o ../../bin/Scene.o ../../bin/SceneManager.o ../../bin/ShockWaveFX.o ../../bin/SlowMotionFX.o ../../bin/SolidItems.o ../../bin/Turret.o ../../bin/XenDemoApp.o ../../bin/Sound.o ../../bin/RefPoint.o ../../bin/DSL.o ../../bin/DSLExecuter.o ../../bin/Elevator.o ../../bin/MainGui.o ../../bin/PhysBoundary.o ../../bin/Platform.o $(RES)
+LINKOBJ  = ../../bin/About.o ../../bin/Barrel.o ../../bin/BgWall.o ../../bin/CargoBox.o ../../bin/Claw.o ../../bin/ClawWeapon.o ../../bin/Column.o ../../bin/Contacts.o ../../bin/Defender.o ../../bin/EdgeWall.o ../../bin/EnemyWeapon.o ../../bin/Explosion.o ../../bin/FullScreenFX.o ../../bin/Hud.o ../../bin/Intro.o ../../bin/LaserCollisonFX.o ../../bin/LaserGate.o ../../bin/MoleculerDecomposer.o ../../bin/NeonItems.o ../../bin/ObjParticle.o ../../bin/Phys.o ../../bin/Resources.o ../../bin/Scene.o ../../bin/SceneManager.o ../../bin/ShockWaveFX.o ../../bin/SlowMotionFX.o ../../bin/SolidItems.o ../../bin/Turret.o ../../bin/XenDemoApp.o ../../bin/Sound.o ../../bin/RefPoint.o ../../bin/DSL.o ../../bin/DSLExecuter.o ../../bin/Elevator.o ../../bin/MainGui.o ../../bin/PhysBoundary.o ../../bin/Platform.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -mwindows ../../lib/SWCore.lib ../../lib/SWEngine.lib ../../lib/SWGame.lib ../../lib/SWGui.lib ../../lib/SWServices.lib ../../lib/SWTypes.lib ../../lib/SWUtil.lib  -g3 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = ../../bin/XenDemo.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS)   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before ../../bin/XenDemo.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "..\..\bin\XenDemo.exe" $(LIBS)
+
+../../bin/About.o: About.cpp
+	$(CPP) -c About.cpp -o ../../bin/About.o $(CXXFLAGS)
+
+../../bin/Barrel.o: Barrel.cpp
+	$(CPP) -c Barrel.cpp -o ../../bin/Barrel.o $(CXXFLAGS)
+
+../../bin/BgWall.o: BgWall.cpp
+	$(CPP) -c BgWall.cpp -o ../../bin/BgWall.o $(CXXFLAGS)
+
+../../bin/CargoBox.o: CargoBox.cpp
+	$(CPP) -c CargoBox.cpp -o ../../bin/CargoBox.o $(CXXFLAGS)
+
+../../bin/Claw.o: Claw.cpp
+	$(CPP) -c Claw.cpp -o ../../bin/Claw.o $(CXXFLAGS)
+
+../../bin/ClawWeapon.o: ClawWeapon.cpp
+	$(CPP) -c ClawWeapon.cpp -o ../../bin/ClawWeapon.o $(CXXFLAGS)
+
+../../bin/Column.o: Column.cpp
+	$(CPP) -c Column.cpp -o ../../bin/Column.o $(CXXFLAGS)
+
+../../bin/Contacts.o: Contacts.cpp
+	$(CPP) -c Contacts.cpp -o ../../bin/Contacts.o $(CXXFLAGS)
+
+../../bin/Defender.o: Defender.cpp
+	$(CPP) -c Defender.cpp -o ../../bin/Defender.o $(CXXFLAGS)
+
+../../bin/EdgeWall.o: EdgeWall.cpp
+	$(CPP) -c EdgeWall.cpp -o ../../bin/EdgeWall.o $(CXXFLAGS)
+
+../../bin/EnemyWeapon.o: EnemyWeapon.cpp
+	$(CPP) -c EnemyWeapon.cpp -o ../../bin/EnemyWeapon.o $(CXXFLAGS)
+
+../../bin/Explosion.o: Explosion.cpp
+	$(CPP) -c Explosion.cpp -o ../../bin/Explosion.o $(CXXFLAGS)
+
+../../bin/FullScreenFX.o: FullScreenFX.cpp
+	$(CPP) -c FullScreenFX.cpp -o ../../bin/FullScreenFX.o $(CXXFLAGS)
+
+../../bin/Hud.o: Hud.cpp
+	$(CPP) -c Hud.cpp -o ../../bin/Hud.o $(CXXFLAGS)
+
+../../bin/Intro.o: Intro.cpp
+	$(CPP) -c Intro.cpp -o ../../bin/Intro.o $(CXXFLAGS)
+
+../../bin/LaserCollisonFX.o: LaserCollisonFX.cpp
+	$(CPP) -c LaserCollisonFX.cpp -o ../../bin/LaserCollisonFX.o $(CXXFLAGS)
+
+../../bin/LaserGate.o: LaserGate.cpp
+	$(CPP) -c LaserGate.cpp -o ../../bin/LaserGate.o $(CXXFLAGS)
+
+../../bin/MoleculerDecomposer.o: MoleculerDecomposer.cpp
+	$(CPP) -c MoleculerDecomposer.cpp -o ../../bin/MoleculerDecomposer.o $(CXXFLAGS)
+
+../../bin/NeonItems.o: NeonItems.cpp
+	$(CPP) -c NeonItems.cpp -o ../../bin/NeonItems.o $(CXXFLAGS)
+
+../../bin/ObjParticle.o: ObjParticle.cpp
+	$(CPP) -c ObjParticle.cpp -o ../../bin/ObjParticle.o $(CXXFLAGS)
+
+../../bin/Phys.o: Phys.cpp
+	$(CPP) -c Phys.cpp -o ../../bin/Phys.o $(CXXFLAGS)
+
+../../bin/Resources.o: Resources.cpp
+	$(CPP) -c Resources.cpp -o ../../bin/Resources.o $(CXXFLAGS)
+
+../../bin/Scene.o: Scene.cpp
+	$(CPP) -c Scene.cpp -o ../../bin/Scene.o $(CXXFLAGS)
+
+../../bin/SceneManager.o: SceneManager.cpp
+	$(CPP) -c SceneManager.cpp -o ../../bin/SceneManager.o $(CXXFLAGS)
+
+../../bin/ShockWaveFX.o: ShockWaveFX.cpp
+	$(CPP) -c ShockWaveFX.cpp -o ../../bin/ShockWaveFX.o $(CXXFLAGS)
+
+../../bin/SlowMotionFX.o: SlowMotionFX.cpp
+	$(CPP) -c SlowMotionFX.cpp -o ../../bin/SlowMotionFX.o $(CXXFLAGS)
+
+../../bin/SolidItems.o: SolidItems.cpp
+	$(CPP) -c SolidItems.cpp -o ../../bin/SolidItems.o $(CXXFLAGS)
+
+../../bin/Turret.o: Turret.cpp
+	$(CPP) -c Turret.cpp -o ../../bin/Turret.o $(CXXFLAGS)
+
+../../bin/XenDemoApp.o: XenDemoApp.cpp
+	$(CPP) -c XenDemoApp.cpp -o ../../bin/XenDemoApp.o $(CXXFLAGS)
+
+../../bin/Sound.o: Sound.cpp
+	$(CPP) -c Sound.cpp -o ../../bin/Sound.o $(CXXFLAGS)
+
+../../bin/RefPoint.o: RefPoint.cpp
+	$(CPP) -c RefPoint.cpp -o ../../bin/RefPoint.o $(CXXFLAGS)
+
+../../bin/DSL.o: DSL.cpp
+	$(CPP) -c DSL.cpp -o ../../bin/DSL.o $(CXXFLAGS)
+
+../../bin/DSLExecuter.o: DSLExecuter.cpp
+	$(CPP) -c DSLExecuter.cpp -o ../../bin/DSLExecuter.o $(CXXFLAGS)
+
+../../bin/Elevator.o: Elevator.cpp
+	$(CPP) -c Elevator.cpp -o ../../bin/Elevator.o $(CXXFLAGS)
+
+../../bin/MainGui.o: MainGui.cpp
+	$(CPP) -c MainGui.cpp -o ../../bin/MainGui.o $(CXXFLAGS)
+
+../../bin/PhysBoundary.o: PhysBoundary.cpp
+	$(CPP) -c PhysBoundary.cpp -o ../../bin/PhysBoundary.o $(CXXFLAGS)
+
+../../bin/Platform.o: Platform.cpp
+	$(CPP) -c Platform.cpp -o ../../bin/Platform.o $(CXXFLAGS)

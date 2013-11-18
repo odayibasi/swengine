@@ -1,0 +1,47 @@
+refPoint &0 &0 
+hud &0 &0
+claw &0 &0
+bgWall &60 &3
+column &128 &400 &30
+edgeX &0 &0   &360
+edgeX &0 &736 &360
+edgeY &0 &32  &22
+airvent  &1400 &500 &5
+airvent  &4000 &500 &5
+clawOthers &700  &32
+clawOthers &2000 &32
+clawPit &200 &20
+neon7d8 &300 &300
+door  &3000 &32
+elevator &1219 &32
+
+
+turret &6000 &667
+cargoBox &7032 &96
+
+
+include &PhysBoundary.lvl 
+include &NearCockpit.lvl     
+include &Hut.lvl  
+
+include &Defenders.lvl 
+
+include &LaserTraps.lvl 
+
+refPoint &2540 &32
+include &Piramit.lvl 
+
+refPoint &7000 &32
+include &Piramit.lvl 
+
+refPoint &1500 &300
+include &PlatformWithBarrel.lvl   
+
+refPoint &1900 &600
+include &PlatformWithBarrel.lvl   
+
+refPoint &5500 &600
+include &PlatformWithBarrel.lvl 
+
+refPoint &6000 &400
+include &PlatformWithBarrel.lvl 
