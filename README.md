@@ -38,8 +38,9 @@ Consist of 7 parts
 * __SWGui:__ Gui components and functions (swNumPropWin, swConsole)
 * __SWEngine:__ Initialize and Setup application (swEngine, swApplication)
 
+## swTypes
 
-## swPoint
+### swPoint
 It holds x,y coordinate. You could define location or coordinate of something.
 ```c
 //Structure
@@ -58,7 +59,7 @@ bool       swPointEquals(swPoint *point1,swPoint *point2);
 ```
 
 
-## swColor
+### swColor
 It holds color values (Red,Green,Blue,Alpha). Color values defined [0,1] range.
 
 ```c
@@ -441,3 +442,55 @@ static swColor SWCOLOR_YELLOW_PROCESS={1.000f,0.937f,0.000f,1.000f};
 static swColor SWCOLOR_YELLOW_RYB={0.996f,0.996f,0.200f,1.000f};
 ```
 
+## swDimension
+It holds dimension value (Width,Height)
+```c
+//Structure
+typedef struct _swDimension{
+   float w;
+   float h;
+}swDimension;
+ 
+//Functions
+swDimension*         swDimensionCreate(float w,float h);
+void                 swDimensionDestroy(swDimension *dimension);
+void                 swDimensionSet(swDimension *p,float w,float h);
+void                 swDimensionCopy(swDimension *copy,swDimension *real);
+swDimension*         swDimensionClone(swDimension *real);
+bool                 swDimensionEquals(swDimension *dimension1,swDimension *dimension2);
+```
+
+### swRect
+It holds rectangle data. This data structure is very important for texture rendering so you usually use this data structure.
+```c
+//Structure
+typedef struct _swRect{
+   float x;
+   float y;
+   float w; //width
+   float h; //height
+}swRect;
+ 
+//Functions
+swRect*   swRectCreate(float x,float y,float w,float h);
+void      swRectDestroy(swRect *rect);
+void      swRectSet(swRect *rect,float x,float y,float w,float h);
+void      swRectCopy(swRect *copy,swRect *real);
+swRect*   swRectClone(swRect *real);
+bool      swRectEquals(swRect *rect1,swRect *rect2);
+float     swRectMidX(swRect *rect);  //rect.x+rect.w/2
+float     swRectMidY(swRect *rect);  //rect.y+rect.h/2
+float     swRectYPlusH(swRect *rect);//rect.y+rect.h
+float     swRectXPlusW(swRect *rect);//rect.x+rect.w
+```
+
+### swPolygon
+It holds polygon data.
+
+```c
+//Structure
+typedef struct _swPolygon{
+   int count;
+   swPoint pointS[25]; 
+}swPolygon;
+```
