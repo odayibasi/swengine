@@ -22,4 +22,4 @@ SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’
   * OpenAL(Audio, Music)
   
   
-  ![SWEngine Overview](/docs/images/overview.png)
+  ![SWEngine Overview](/docs/images/overview.jpg)
