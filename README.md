@@ -1,4 +1,4 @@
-#SWEngine
+# SWEngine
 ========
   ![SWEngine Logo](/docs/images/swenginesdk.jpg)
 
