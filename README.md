@@ -33,7 +33,7 @@ SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’
 
 Consist of 7 parts
 
-* __SWTypes:__ Common data types defined (swPoint, swColor, swDimension,, swRect, swPolygon, swVec2, swArg)
+* __SWTypes:__ Common data types defined ([swPoint](#swPoint), [swColor](#swColor), [swDimension](#swDimension), [swRect](#swrect), [swPolygon](#swPolygon), [swVec2](#swVect), [swArg](#swArg))
 * __SWUtil:__ Utility functions for games (swMath, swString, swLinkedList, swStack, swIntersection, swLogger, swTimer)
 * __SWCore:__ It's the core part of SWEngine. It contains basic functions for game development (swGraphics, swAudio, swInput, swSystem, swFileSystem, swImgBuffer)
 * __SWServices:__ It provides high level services for game mechanism (swDispManager, swExecManager, swInteractionManager, swPersistManager, swScheduledManager, swPhys, swMousBehaviour, swKeybBehaviour, swDSL)
@@ -664,10 +664,13 @@ bool swIntersectionRectAndRect(swRect *r0,swRect *r1);
 
 ### swLogger
 Util functions for logging
+
+```c
 //Functions
 FILE* swLoggerOpen();
 void  swLoggerClose();
 void  swLoggerLog(const char* log,...);
+```
 
 ### swTimer
 Timer implementation like Java swing.Timer class. You first register a function and set delay seconds for triggering callback functions
@@ -1158,6 +1161,75 @@ Domain Spesific Language
 void  swDSLRegisterCommand(void(*cmdFunc)(int,swArg *cArgs),char *cmdName,int count,swArg *cArgs);
 bool  swDSLExecuteCommand(char *fullCmd);
 ```
+
+## swGame
+
+### swAnimator
+Animator api provides image transition with defined rule(mode and elapsed time).
+Note: In Animator there is no another execution function for image transition. Image transition executes when getIndex() function call. Animator calculate the next image. So the only displayed images executes Animator and performance utilization occured.
+
+```c
+//Functions
+typedef enum {
+   SW_ANIMATOR_EXEC_STOP,
+   SW_ANIMATOR_EXEC_FORWARD,
+   SW_ANIMATOR_EXEC_BACKWARD,
+   SW_ANIMATOR_EXEC_BACKWARD_LOOP,
+   SW_ANIMATOR_EXEC_FORWARD_LOOP,
+}swAnimatorExecMode;
+ 
+int   swAnimatorCreate(int count, float delay); 
+void  swAnimatorDestroy(int animatorID);
+void  swAnimatorSetIndex(int animatorID,int imgIndex);
+int   swAnimatorGetIndex(int animatorID);
+void  swAnimatorSetDelay(int animatorID,float delay);
+void  swAnimatorSetExecutionMode(int animatorID, swAnimatorExecMode mode); 
+bool  swAnimatorIsLastFrameActive(int animatorID); 
+bool  swAnimatorIsFirstFrameActive(int animatorID);
+```
+
+### swLinker
+```c
+//Functions
+void  swLinkerInit();
+void  swLinkerDeInit();
+int   swLinkerCreate(swPoint *parent,swPoint *child);
+void  swLinkerDestroy(int linkerID);
+void  swLinkerBind0(int linkerID,swRect *parent,swRect *child);
+void  swLinkerBind1(int linkerID,int linkerCID,swRect *parent,int indexParent,swRect *child,int indexChild);
+void  swLinkerBind2(int linkerID,
+                   swRect *sourceParent,swRect *targetParent,swPoint *wpParent,float rotParent, int indexParent,
+                   swRect *sourceChild,swRect *targetChild,swPoint *wpChild,float rotChild,int indexChild);
+```
+
+### swInterpolator
+For example we are on X0 position and want to go X1 position in 10 seconds. So how to calculate our position in a specific time.(No accelearation). In Java3D below interpolation exist. I try to make simalar api. Java3D
+
+ * Interpolater
+    * ColorInterpolator
+    * SwitchValueInterpolator
+    * TransparencyInterpolator
+    * TransformInterpolator
+        * PositionInterpolator
+        * RotationInterpolator
+        * ScaleInterpolator
+        * PathInterpolator
+            * PositionPathInterpolator
+            * RotationPathInterpolator
+            * RotPosPathInterpolator
+            * RotPosScalePathInterpolator
+
+You can use SWEngine interpolation module for color, position, scale and rotation operations
+
+```c
+//Functions
+int    swInterpolaterCreate(float initVal,float endVal,float totalTime); 
+void   swInterpolaterDestroy(int id);
+bool   swInterpolaterIsFinished(int interpolaterID); 
+void   swInterpolaterStart(int interpolaterID); 
+float  swInterpolaterGetValue(int interpolaterID);
+```
+
 
 
 
