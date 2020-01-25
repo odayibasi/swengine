@@ -1,5 +1,8 @@
 #SWEngine
 ========
+  ![SWEngine Logo](/docs/images/swenginesdk.jpg)
+
+
 
 SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’s primary purpose is to allow developers high level access to game domains so they don’t need to learn lots of game development details..
 
@@ -548,6 +551,9 @@ typedef struct _swArg{
 }swArg;
 ```
 
+
+## swUtil
+
 ### swMath
 Utility functions for math operations
 
@@ -602,8 +608,6 @@ bool  swString2Bool(char *p);
 void  swStringParse(char *str,char separator,char *val,char *remaining);
 ```
 
-## swUtil
-
 ### swLinkedList 
 Linked List Implementation.
 
@@ -623,5 +627,59 @@ void   swLinkedListIterate(int listID,void(*func)(void*));
 void   swLinkedListClear(int listID);
 bool   swLinkedListContains(int listID,void *obj);
 ```
+
+### swStack
+Stack Implementation.
+
+```c
+//Functions
+int   swStackCreate();
+void  swStackDestroy(int stackID);
+void  swStackPush(int stackID, void *obj);
+void* swStackPop(int stackID);
+void* swStackPeek(int stackID);
+bool  swStackIsEmpty(int stackID);
+int   swStackSize(int stackID);
+```
+
+### swIntersection
+Utility functions for collision detection. This utility function for simple usage. In real simulation collision you should use SWPhys API
+
+```c
+//Functions
+bool swIntersectionLineAndLine(swPoint *line0Start,swPoint *line0End,swPoint *line1Start,swPoint *line1End);
+bool swIntersectionLineAndPoint(swPoint *lineStart,swPoint *lineEnd,swPoint *point);
+bool swIntersectionCircleAndPoint(swPoint *center,float radious,swPoint *point);
+bool swIntersectionCircleAndLine(swPoint *center,float radious,swPoint *line0Start,swPoint *line0End);
+bool swIntersectionCircleAndCircle(swPoint *center0,float radious0,swPoint *center1,float radious1);
+bool swIntersectionRectAndPoint(swRect *rect,swPoint *point);
+bool swIntersectionRectAndPoint2(swRect *rect,float x,float y);
+bool swIntersectionRectAndLine(swRect *rect,swPoint *line0Start,swPoint *line0End);
+bool swIntersectionBoundaryAndBoundary(swPolygon *b1,swPolygon *b2);
+bool swIntersectionBoundaryAndPoint(swPolygon *b1,swPoint *pos);
+bool swIntersectionBoundaryAndLine(swPolygon *b1,swPoint *line0Start,swPoint *line0End);
+bool swIntersectionBoundaryAndRect(swPolygon *boundary,swRect *rect);
+bool swIntersectionRectAndRect(swRect *r0,swRect *r1);
+```
+
+### swLogger
+Util functions for logging
+//Functions
+FILE* swLoggerOpen();
+void  swLoggerClose();
+void  swLoggerLog(const char* log,...);
+
+### swTimer
+Timer implementation like Java swing.Timer class. You first register a function and set delay seconds for triggering callback functions
+```c
+//Functions
+int  swTimerCreate(float delaySeconds,void *obj,void(*callBack)(void *));
+void swTimerDestroy(int timerID);
+void swTimerStart(int timerID);
+void swTimerStop(int timerID);
+bool swTimerIsRunning(int timerID);
+```
+
+## swCore
 
 
