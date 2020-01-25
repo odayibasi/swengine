@@ -34,12 +34,12 @@ SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’
 Consist of 7 parts
 
 * __SWTypes:__ Common data types defined ([swPoint](#swPoint), [swColor](#swColor), [swDimension](#swDimension), [swRect](#swrect), [swPolygon](#swPolygon), [swVec2](#swVect), [swArg](#swArg))
-* __SWUtil:__ Utility functions for games ([swMath](*swMath), [swString](*swString), [swLinkedList](*swLinkedList), [swStack](*swStack), [swIntersection](*swIntersection), [swLogger](*swLogger), [swTimer](*swTimer))
-* __SWCore:__ It's the core part of SWEngine. It contains basic functions for game development ([swGraphics](*swGraphics), [swAudio](*swAudio), [swInput](*swInput), [swSystem](*swSystem), [swFileSystem](*swFileSystem), [swImgBuffer](*swImgBuffer))
-* __SWServices:__ It provides high level services for game mechanism ([swDispManager](*swDispManager), [swExecManager](*swExecManager), [swInteractionManager](*swInteractionManager), [swPersistManager](*swPersistManager), [swScheduledManager](*swScheduledManager), [swPhys](*swPhys), [swMousBehaviour](*swMousBehaviour), [swKeybBehaviour](*swKeybBehaviour), [swDSL](*swDSL))
-* __SWGame:__ Game component's behaviour controls (swAnimator], [swLinker](*swLinker), [swInterpolator](*swInterpolator), [swValueModifier](*swValueModifier))
-* __SWGui:__ Gui components and functions ([swNumPropWin](*swNumPropWin), [swConsole](*swConsole))
-* __SWEngine:__ Initialize and Setup application ([swEngine](*swEngine), [swApplication](*swApplication))
+* __SWUtil:__ Utility functions for games ([swMath](#swMath), [swString](#swString), [swLinkedList](#swLinkedList), [swStack](#swStack), [swIntersection](#swIntersection), [swLogger](#swLogger), [swTimer](#swTimer))
+* __SWCore:__ It's the core part of SWEngine. It contains basic functions for game development ([swGraphics](#swGraphics), [swAudio](#swAudio), [swInput](#swInput), [swSystem](#swSystem), [swFileSystem](#swFileSystem), [swImgBuffer](#swImgBuffer))
+* __SWServices:__ It provides high level services for game mechanism ([swDispManager](#swDispManager), [swExecManager](#swExecManager), [swInteractionManager](#swInteractionManager), [swPersistManager](#swPersistManager), [swScheduledManager](#swScheduledManager), [swPhys](#swPhys), [swMousBehaviour](#swMousBehaviour), [swKeybBehaviour](#swKeybBehaviour), [swDSL](#swDSL))
+* __SWGame:__ Game component's behaviour controls (swAnimator], [swLinker](#swLinker), [swInterpolator](#swInterpolator), [swValueModifier](#swValueModifier))
+* __SWGui:__ Gui components and functions ([swNumPropWin](#swNumPropWin), [swConsole](#swConsole))
+* __SWEngine:__ Initialize and Setup application ([swEngine](#swEngine), [swApplication](#swApplication))
 
 ## SWTypes
 
