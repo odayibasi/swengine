@@ -494,3 +494,134 @@ typedef struct _swPolygon{
    swPoint pointS[25]; 
 }swPolygon;
 ```
+
+
+### swVec2
+It hold 2D vector data...
+
+```c
+//Structure
+typedef swPoint swVec2;
+ 
+//Functions
+swVec2* swVec2Create(float x,float y);
+void    swVec2Destroy(swVec2 *v);
+void    swVec2Set(swVec2 *v,float x,float y);
+void    swVec2Copy(swVec2 *copy,swVec2 *real);
+swVec2* swVec2Clone(swVec2 *real);
+bool    swVec2Equals(swVec2 *v1,swVec2 *v2);
+swVec2* swVec2Add(swVec2 *v1,swVec2 *v2);
+swVec2* swVec2Sub(swVec2 *v1,swVec2 *v2);
+swVec2* swVec2Mult(swVec2 *v,float val);
+swVec2* swVec2Div(swVec2 *v,float val);
+float   swVec2Length(swVec2 *v);
+float   swVec2Angle(swVec2 *v1,swVec2 *v2);
+swVec2* swVec2Normal(swVec2 *v);
+swVec2* swVec2Abs(swVec2 *v);
+swVec2* swVec2Reflect(swVec2 *normal,swVec2 *light);
+swVec2* swVec2CrossX(swVec2 *v,float s);
+swVec2* swVec2CrossY(swVec2 *v,float s);
+swVec2* swVec2MultMat22(swMat22 *m, swVec2 *v);
+```
+
+### swArg
+Generic argument types. These are bool(true/false),int,float,string
+
+```c
+//Structure
+typedef enum _swArgType{
+   SW_ARG_BOOL,
+   SW_ARG_INT,
+   SW_ARG_FLOAT,
+   SW_ARG_STRING,
+}swArgType;
+ 
+ 
+typedef struct _swArg{
+   swArgType type;
+   union{
+      bool  bVal;
+      int   iVal;
+      float fVal;
+      char  sVal[16];
+   }arg;
+}swArg;
+```
+
+### swMath
+Utility functions for math operations
+
+```c
+//Constants
+define SW_MATH_PI 3.14678f
+ 
+//Functions
+float  swMathCos(angle)  //degree
+float  swMathSin(angle)  //degree
+float  swMathDegreeToRadian(float degree);
+float  swMathRadianToDegree(float radian);
+float  swMathDegree(float x0,float y0,float x1,float y1);
+float  swMathDistance(float x0,float y0,float x1,float y1);
+float  swMathMax(float val1, float val2);
+float  swMathMin(float val1, float val2);
+float  swMathAbs(float val);
+float  swMathSign(float val);
+bool   swMathIsPowerTwo(float val);
+bool   swMathIsInRangeInt(int val,int minVal,int maxVal);
+bool   swMathIsInRangeFloat(float val,float minVal,float maxVal);
+int    swMathClampInt(int val,int minVal,int maxVal);
+float  swMathClampFloat(float val,float minVal,float maxVal);
+float  swMathRandom(float minVal,float maxVal);
+float  swMathRandomFloat(float minVal,float maxVal);
+int    swMathRandomInt(int minVal,int maxVal);
+void   swMathSetSeed(int randomSeed);
+void   swMathSourceCalculate(swRect *rect,int xGridSize,int yGridSize,int xGridIndex,int yGridIndex);
+```
+
+### swString
+Utility function for String operations
+
+```c
+//Functions
+int   swStringGetLength(char *str);
+char* swStringGetChrAdress(char *str,int ch);
+int   swStringGetChrPosition(char *str,char ch);
+bool  swStringEquals(char *str1, char *str2);
+bool  swStringContains(char *str,char *searchStr);
+char* swStringConcat(char *p1,char *p2); //Don't use in loop it allocate mem for all call
+void  swStringConcat1(char *p1,char *p2);
+char* swStringConcatEx(char *str1, int start1,int end1,char *str2, int start2,int end2); //Don't use in loop it allocate mem for all call
+void  swStringCopy(char *str1,char *str2);
+void  swStringCopyEx(char *str1,char *str2,int start,int stop);
+void  swStringReplaceChrInString(char *str,char oldchr,char *newchr);
+void  swString2LowerCase(char *str);
+void  swString2UpperCase(char *str);
+void  swString2Float(char *p,float *f);
+int   swString2Int(char *p);
+bool  swString2Bool(char *p);
+void  swStringParse(char *str,char separator,char *val,char *remaining);
+```
+
+## swUtil
+
+### swLinkedList 
+Linked List Implementation.
+
+```c
+//Functions
+int    swLinkedListCreate();
+void   swLinkedListDestroy(int listID);
+void   swLinkedListAdd(int listID, void *obj);
+void   swLinkedListDel(int listID,void *obj);
+void*  swLinkedListGet(int listID,int index);
+void*  swLinkedListGetFirst(int listID);
+void*  swLinkedListGetLast(int listID);
+void*  swLinkedListGetNext(int listID);
+void*  swLinkedListGetPrev(int listID);
+int    swLinkedListSize(int listID);
+void   swLinkedListIterate(int listID,void(*func)(void*));
+void   swLinkedListClear(int listID);
+bool   swLinkedListContains(int listID,void *obj);
+```
+
+
