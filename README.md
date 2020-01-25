@@ -682,4 +682,483 @@ bool swTimerIsRunning(int timerID);
 
 ## swCore
 
+### swGraphics
+OpenGL and GSLS Rendering functions
+
+```c
+//Scene Control
+void swGraphicsBeginScene();  
+void swGraphicsEndScene();
+
+//Query
+bool swGraphicsIsSupportGLSL();
+bool swGraphicsIsSupportRectTex();
+bool swGraphicsIsSupportPointSprite();
+bool swGraphicsIsSupportFBOSupport();
+
+//Blending
+typedef enum{
+  SW_BLENDING_MODE_NONE,
+  SW_BLENDING_MODE_ADDITIVE,
+  SW_BLENDING_MODE_SOLID,
+  SW_BLENDING_MODE_SKETCH,
+}swBlendingMode;
+void             swGraphicsSetBlendingMode(swBlendingMode mode);
+swBlendingMode   swGraphicsGetBlendingMode();
+
+
+//Rendering Target
+#define SW_RENDERING_TARGET_DEFAULT -1      
+int        swGraphicsCreateRenderingTarget(int width, int height, int iBytesPerPixel);
+void        swGraphicsDestroyRenderingTarget(int targetID);
+void        swGraphicsSetRenderingTarget(int targetID);
+void        swGraphicsClearRenderingTarget();
+int        swGraphicsRenderingTargetGetImgID(int targetID);
+
+//Shader
+#define SW_DISABLED_SHADER_ID 0
+int  swGraphicsCreateGLSLShader(char *pathVertShader,char *pathFragShader);
+void swGraphicsActiveGLSLShader(int shaderID);
+void swGraphicsSetGLSLShaderIntAttrb(int program, char *name,int value);
+void swGraphicsSetGLSLShaderFloatAttrb(int program, char *name,float value);
+void swGraphicsSetGLSLShaderVec2Attrb(int program, char *name,swVec2 vec2);
+void swGraphicsSetGLSLShaderPointAttrb(int program, char *name,swPoint point);
+void swGraphicsSetGLSLShaderDimensionAttrb(int program, char *name,swDimension dim);
+void swGraphicsSetGLSLShaderColorAttrb(int program, char *name,swColor color);
+void swGraphicsSetGLSLShaderRectAttrb(int program, char *name,swRect rect);
+
+
+//Coloring 
+void swGraphicsSetBgColor0(float r,float g,float b);
+void swGraphicsSetBgColor1(float r,float g,float b,float a);
+void swGraphicsSetBgColor2(swColor *bgColor);
+void swGraphicsSetColor0(float r,float g,float b,float a);
+void swGraphicsSetColor1([[swColor]] *c);
+
+//Camera
+#define SW_CAM_DEFAULT -1   
+int   swGraphicsCreateCam();
+void  swGraphicsDestroyCam(int camID);
+void  swGraphicsSetCam(int camID,float x,float y,float rot,float zoom);
+void  swGraphicsSetCamPos(int camID,float x,float y);
+void  swGraphicsSetCamPosX(int camID,float x);
+void  swGraphicsSetCamPosY(int camID,float y);
+void  swGraphicsSetCamRot(int camID,float rot);
+void  swGraphicsSetCamZoom(int camID,float zoom);
+void  swGraphicsAddCamPosX(int camID,float dX);
+void  swGraphicsAddCamPosY(int camID,float dY);
+void  swGraphicsAddCamRot (int camID,float dR);
+void  swGraphicsAddCamZoom(int camID,float dZ);
+float swGraphicsGetCamPosX(int camID);
+float swGraphicsGetCamPosY(int camID);
+float swGraphicsGetCamRot(int camID);
+float swGraphicsGetCamZoom(int camID);
+void  swGraphicsActiveCam(int camID);
+
+
+//Primitive Rendering
+void swGraphicsRenderPoint0(float x,float y,float size);
+void swGraphicsRenderPoint1(swPoint *point,float size);
+void swGraphicsRenderLine0(float x0,float y0,float x1,float y1,float width);
+void swGraphicsRenderLine1(swPoint *startP,swPoint* endP,float width);
+void swGraphicsRenderLine2(swPoint *startP,swPoint* endP,float width,float rot);
+void swGraphicsRenderLine3(swPoint *startP,swPoint* endP,float width,float rot,swPoint *weight);
+void swGraphicsRenderPointRect0(float x,float y,float w,float h,float size);
+void swGraphicsRenderPointRect1(swPoint *pos,swDimension *dim,float size);
+void swGraphicsRenderPointRect2(swRect *rect,float size);
+void swGraphicsRenderPointRect3(swRect *rect,float size,float rot);
+void swGraphicsRenderPointRect4(swRect *rect,float size,float rot,swPoint *weight);
+void swGraphicsRenderLineRect0(float x,float y,float w,float h,float width);
+void swGraphicsRenderLineRect1(swPoint *pos,swDimension *dim,float width);
+void swGraphicsRenderLineRect2(swRect *rect,float width);
+void swGraphicsRenderLineRect3(swRect *rect,float width,float rot);
+void swGraphicsRenderLineRect4(swRect *rect,float width,float rot,swPoint *weight);
+void swGraphicsRenderSolidRect0(float x,float y,float w,float h);
+void swGraphicsRenderSolidRect1(swPoint *pos,swDimension *dim);
+void swGraphicsRenderSolidRect2(swRect *rect);
+void swGraphicsRenderSolidRect3(swRect *rect,float rot);
+void swGraphicsRenderSolidRect4(swRect *rect,float rot,swPoint *weight);
+void swGraphicsRenderPointElips0(float x,float y,float w,float h,int count,float size);
+void swGraphicsRenderPointElips1(swPoint *pos,swDimension *dim,int count,float size);
+void swGraphicsRenderPointElips2(swPoint *pos,swDimension *dim,int count,float size,float rot);
+void swGraphicsRenderPointElips3(swPoint *pos,swDimension *dim,int count, float size, float rot,swPoint *weight);
+void swGraphicsRenderLineElips0(float x,float y,float w,float h,int count,float width);
+void swGraphicsRenderLineElips1(swPoint *pos,swDimension *dim,int count,float width);
+void swGraphicsRenderLineElips2(swPoint *pos,swDimension *dim,int count,float width,float rot);
+void swGraphicsRenderLineElips3(swPoint *pos,swDimension *dim,int count, float width,float rot, swPoint *weight);
+void swGraphicsRenderSolidElips0(float x,float y,float w,float h,int count);
+void swGraphicsRenderSolidElips1(swPoint *pos,swDimension *dim,int count);
+void swGraphicsRenderSolidElips2(swPoint *pos,swDimension *dim,int count,float rot);
+void swGraphicsRenderSolidElips3(swPoint *pos,swDimension *dim,int count, float rot, swPoint *weight);
+void swGraphicsRenderPointPolygon0(int count,swPoint *pointS,float size);
+void swGraphicsRenderPointPolygon1(int pointLinkedListID,float size);
+void swGraphicsRenderPointPolygon2(swPolygon *polygon,float size);
+void swGraphicsRenderLinePolygon0(int count,swPoint *pointS,float width);
+void swGraphicsRenderLinePolygon1(int pointLinkedListID,float width);
+void swGraphicsRenderLinePolygon2(swPolygon *polygon,float width);
+void swGraphicsRenderSolidPolygon0(int count,swPoint *pointS);
+void swGraphicsRenderSolidPolygon1(int pointLinkedListID);
+void swGraphicsRenderSolidPolygon2(swPolygon *polygon);
+
+ 
+//Image Rendering
+//t=Rendering Target s=Texture Target weight=Rotation Weight
+int   swGraphicsCreateImg(char *filePath); 
+void  swGraphicsDestroyImg(int imgID);  
+void  swGraphicsRenderImg0(int imgID,swRect *t);
+void  swGraphicsRenderImg1(int imgID,swRect *t,float rot);
+void  swGraphicsRenderImg2(int imgID,swRect *t,swRect *s);
+void  swGraphicsRenderImg3(int imgID,swRect *t,swRect *s,float rot);
+void  swGraphicsRenderImg4(int imgID,swRect *t,float rot, swPoint *weight);
+void  swGraphicsRenderImg5(int imgID,swRect *t,swRect *s,float rot, swPoint *weight);
+//Enable or Disable UVScrolling Capability
+void  swGraphicsSetImgUVScrollable(int imgID,bool bEnabled); 
+
+//Sprite Rendering
+//index= Image no in index t=Rendering Target s=Texture Target weight=Rotation Weight
+int   swGraphicsCreateSprite(char *folderPath);  
+void  swGraphicsDestroySprite(int spriteID);
+int   swGraphicsGetCountOfImgInSprite(int spriteID);
+void  swGraphicsRenderSprite0(int spriteID,int index,swRect *t);
+void  swGraphicsRenderSprite1(int spriteID,int index,swRect *t,float rot);
+void  swGraphicsRenderSprite2(int spriteID,int index,swRect *t,swRect *s);
+void  swGraphicsRenderSprite3(int spriteID,int index,swRect *t,swRect *s,float rot);
+void  swGraphicsRenderSprite4(int spriteID,int index,swRect *t,float  rot, swPoint *weight);
+void  swGraphicsRenderSprite5(int spriteID,int index,swRect *t,swRect *s,float rot, swPoint *weight);
+
+//Text Rendering
+int  swGraphicsCreateFont(char *filePath);  
+void swGraphicsDestroyFont(int fontID);  
+void swGraphicsRenderText(int fontID,int set,float size,float x,float y,float rot,char *string,...);
+void swGraphicsSetSpriteUVScrollable(int spriteID,bool bEnabled)
+
+
+//Point Sprite Rendering
+typedef struct _swPointSprite{
+   swPoint pos;
+   swColor color;
+}swPointSprite;
+int  swGraphicsCreatePointSprite(char *filePath); 
+void swGraphicsDestroyPointSprite(int pSpriteID); 
+void swGraphicsRenderPointSprite(int pSpriteID,float pSize,int count,swColor *cS,swPoint* pS); 
+void swGraphicsRenderPointSprite1(int pSpriteID,float pSize,int count,swPointSprite *pSprites); 
+void swGraphicsRenderPointSprite2(int pSpriteID,float pSize,int pointSpriteListID);
+```
+
+### swAudio
+swAudio api setup over OpenAL api. Support Ogg and Wav files.
+
+```c
+//Audio Buffer
+typedef enum _swAudioBufferType{
+   SW_AUDIO_BUFFER_TYPE_WAV,
+   SW_AUDIO_BUFFER_TYPE_OGG,
+   SW_AUDIO_BUFFER_TYPE_OGG_STREAM,
+}swAudioBufferType;
+ 
+int      swAudioCreateBuffer(char *path, swAudioBufferType bufferType);
+void      swAudioDestroyBuffer(int bufferID);
+ 
+ 
+//Audio Source
+typedef enum _swAudioSourceState{
+  SW_AUDIO_SOURCE_STATE_NOBUFFER,
+  SW_AUDIO_SOURCE_STATE_INITIAL,
+  SW_AUDIO_SOURCE_STATE_PLAYING,
+  SW_AUDIO_SOURCE_STATE_PAUSE,
+  SW_AUDIO_SOURCE_STATE_STOP,
+}swAudioSourceState;
+ 
+ 
+int                swAudioCreateSource();
+void               swAudioDestroySource(int sourceID);
+void               swAudioBindSourceAndBuffer(int sourceID,int bufferID);
+void               swAudioPlaySource(int sourceID);
+void               swAudioPauseSource(int sourceID);
+void               swAudioStopSource(int sourceID);
+void               swAudioRewindSource(int sourceID);
+swAudioSourceState swAudioGetSourceState(int sourceID);
+char*              swAudioGetSourceStateText(int sourceID);
+void               swAudioSetSourcePosition(int sourceID,float x,float y,float z);
+void               swAudioSetSourcePitch(int sourceID,float pitch);
+void               swAudioSetSourceGain(int sourceID,float gain);
+void               swAudioSetSourceLoop(int sourceID,bool loop);
+ 
+ 
+//Audio Listener
+void               swAudioSetListenerPosition(float x,float y,float z);
+```
+
+### swInput
+SWEngine provides keyboard and mouse listen functions so developer can easily handle user interactions.
+
+```c
+
+//Functions
+void swInputListenKeyboard(swKeyboardState *state);
+void swInputListenMouse(swMouseState *state);
+ 
+//Keyboard State
+typedef struct _swKeyboardState{
+  BOOL keyESCAPE,key1,key2,key3,key4,key5,key6,key7,key8,key9,key0,keyMINUS,keyEQUALS,keyBACK,keyTAB,keyQ;
+  BOOL keyW,keyE,keyR,keyT,keyY,keyU,keyI,keyO,keyP,keyLBRACKET,keyRBRACKET,keyRETURN,keyLCONTROL,keyA;
+  BOOL keyS,keyD,keyF,keyG,keyH,keyJ,keyK,keyL,keySEMICOLON,keyAPOSTROPHE,keyGRAVE,keyLSHIFT,keyBACKSLASH,keyZ,keyX;
+  BOOL keyC,keyV,keyB,keyN,keyM,keyCOMMA,keyPERIOD,keySLASH,keyRSHIFT,keyMULTIPLY,keyLMENU,keySPACE,keyCAPITAL,keyF1;
+  BOOL keyF2,keyF3,keyF4,keyF5,keyF6,keyF7,keyF8,keyF9,keyF10,keyNUMLOCK,keySCROLL,keyNUMPAD7,keyNUMPAD8,keyNUMPAD9;
+  BOOL keySUBTRACT,keyNUMPAD4,keyNUMPAD5,keyNUMPAD6,keyADD,keyNUMPAD1,keyNUMPAD2,keyNUMPAD3,keyNUMPAD0;
+  BOOL keyDECIMAL,keyOEM_102,keyF11,keyF12,keyF13,keyF14,keyF15,keyKANA,keyABNT_C1,keyCONVERT,keyNOCONVERT;
+  BOOL keyYEN,keyABNT_C2,keyNUMPADEQUALS,keyPREVTRACK,keyAT,keyCOLON,keyUNDERLINE,keyKANJI,keySTOP,keyAX,keyUNLABELED;
+  BOOL keyNEXTTRACK,keyNUMPADENTER,keyRCONTROL,keyMUTE,keyCALCULATOR,keyPLAYPAUSE,keyMEDIASTOP,keyVOLUMEDOWN,keyVOLUMEUP;
+  BOOL keyWEBHOME,keyNUMPADCOMMA,keyDIVIDE,keySYSRQ,keyRMENU,keyPAUSE,keyHOME,keyUP,keyPRIOR,keyLEFT,keyRIGHT;
+  BOOL keyEND,keyDOWN,keyNEXT,keyINSERT,keyDELETE,keyLWIN,keyRWIN,keyAPPS,keyPOWER,keySLEEP,keyWAKE,keyWEBSEARCH;
+  BOOL keyWEBFAVORITES,keyWEBREFRESH,keyWEBSTOP,keyWEBFORWARD,keyWEBBACK,keyMYCOMPUTER,keyMAIL,keyMEDIASELECT;
+}swKeyboardState;
+ 
+//Mouse State
+typedef struct _swMouseState{
+  BOOL btnLEFT,btnRIGHT,btnMIDDLE;
+  float dX,dY;
+  float x,y;
+}swMouseState;
+```
+
+### swSystem
+It provides information about running application
+```c
+//Functions
+float swSystemGetElapsedSeconds(); // Return total time after application start.
+void  swSystemCaptureScreen(char *path,swImgType type); //Save ScreenShot to spesific path
+```
+
+### swFileSystem
+This api provides file system control functions on Windows.
+```c
+//Functions
+void  swFileSystemSetResourcePath(char *name);
+char* swFileSystemGetProgramWorkingPath();
+char* swFileSystemGetResourcePath();
+FILE* swFileSystemOpenFile(char *path,char *mode);
+void  swFileSystemQueryFiles(char *folderPath,int fileLinkedListID,char *extensionFilter)
+```
+
+### swImgBuffer
+This api for detail image operations on TGA, BMP, PNG, JPEG , GIF image formats
+```c
+//Functions
+typedef enum _swImgType{
+  SW_IMGTYPE_TGA,
+}swImgType;
+void        swImgBufferLoad(char *path, swImgType imgType);
+void        swImgBufferLoadTGA(char *path);
+void        swImgBufferFree();
+int        swImgBufferGetWidth();
+int        swImgBufferGetHeight();
+void        swImgBufferGetPixel(int x,int y,swColor *color);
+```
+
+
+## swServices
+
+### swDispManager
+In games, object display process is very important for performance utilization and display capability.
+
+* Culling mechanism, filters objects which are out side screen. 
+* Layer Mechanism, sorts objects from background to foreground.
+* Item Display Control, manages item visiblities..
+  
+```c
+//Functions
+int   swDispManagerAdd(void(*dispFunc)(void*), void *obj,boolean *bEnabled,swRect *rect,int *layer); 
+void  swDispManagerDel(int id);
+//This function should call between swGraphicsBeginDisplay()/swGraphicsEndDisplay() 
+void  swDispManagerExecute(); 
+int   swDispManagerSizeOfAll();
+int   swDispManagerSizeOfRendered();
+```
+
+### swExecManager
+
+In games, object display process is very important for performance utilization and display capability.
+
+ * Culling mechanism, filters objects which are out side screen.
+ * Layer Mechanism, sorts objects from background to foreground.
+ * Item Display Control, manages item visiblities..
+
+```c
+//Functions
+int   swExecManagerAdd(void(*execFunc)(void*), void *obj,bool *bEnabled);
+void  swExecManagerDel(int id);
+void  swExecManagerExecute();
+```
+
+### swInteractionManager
+```c
+//Functions
+void  swInteractionManagerInit();
+void  swInteractionManagerDeInit();
+int   swInteractionManagerAdd(void(*intrFunc)(void*,swKeyboardState *,swMouseState *), void *obj,boolean *bEnabled);
+void  swInteractionManagerExecute(swKeyboardState *keybState,swMouseState *mousState);
+void  swInteractionManagerDel(int id);
+```
+
+### swPersistManager
+PersistManager is a mechanism for saving game objects to file system. SOA (Service Oriented Architecture)
+
+```c
+//Functions
+int   swPersistManagerAdd(void(*saveFunc)(FILE *,void*), void *obj);
+void  swPersistManageDel(int id);
+void  swPersistManagerExecute(FILE *file);
+```
+
+### swScheduledManager
+It provides an api that's time dependent trigger. You can register your function and set trigger time. Or after an operator you register and say trigger my function 5 second after.
+
+ * In demo first service provide time band trigger mechanism. You only register you callback functions when demo initialize.
+ * In game second service provide to set wating time in operations.
+
+```c
+//Functions
+void  swScheduledManagerAdd0(void(*scheduledFunc)(void*), void *obj,float triggerTime);
+void  swScheduledManagerAdd1(void(*scheduledFunc)(void*), void *obj,float waitingTime);
+```
+
+### swPhys
+Rigid body simulation on Box2D. This api support Body, Joints and Contact.
+
+```c
+//World
+void swPhysWorldSetMeterOfPixelRatio(float ratio);
+void swPhysWorldCreate(swRect *AABB, swVec2 *gravity,bool doSleep);
+void swPhysWorldDestroy();
+void swPhysWorldUpdate();
+void swPhysWorldSetGravity(swVec2 *gravity);
+ 
+//Renderer
+typedef enum _swPhysRenderedItemEnum{
+  SW_PHYS_RENDERED_SHAPE,
+  SW_PHYS_RENDERED_JOINTS,
+  SW_PHYS_RENDERED_CORESHAPES,
+  SW_PHYS_RENDERED_AABBs,
+  SW_PHYS_RENDERED_OBBs,
+  SW_PHYS_RENDERED_PAIRS,
+  SW_PHYS_RENDERED_CONTACTPOINTS,
+  SW_PHYS_RENDERED_CONTACTNORMALS,
+  SW_PHYS_RENDERED_CONTACTFORCES,
+  SW_PHYS_RENDERED_FRICTIONFORCES,
+  SW_PHYS_RENDERED_CENTEROFMASSES,
+  SW_PHYS_RENDERED_STATISTICS,
+}swPhysRenderedItemEnum;
+ 
+ 
+void swPhysRendererSetEnabled(swPhysRenderedItemEnum type, boolean bVisible);
+void swPhysRendererExecute();
+ 
+ 
+//BodyDef
+void  swPhysBodyDefSetPos(float x,float y);
+void  swPhysBodyDefSetAngle(float angle);
+void  swPhysBodyDefSetRectShapeType(float w,float h);
+void  swPhysBodyDefSetCircleShapeType(float radious);
+void  swPhysBodyDefSetLinearDamping(float damping);
+void  swPhysBodyDefSetDensity(float density);
+void  swPhysBodyDefSetFriction(float friction);
+void  swPhysBodyDefSetRestitution(float restitution);
+void  swPhysBodyDefSetFixedRotation(bool bfixedRot);
+void  swPhysBodyDefSetBullet(bool isBullet);
+void  swPhysBodyDefSetFilterGroupIndex(int index);
+void  swPhysBodyDefSetPosListener(float *xListener,float *yListener);
+void  swPhysBodyDefSetAngleListener(float *angleListener);
+ 
+//Body
+int   swPhysBodyCreate();
+void  swPhysBodyDestroy(int bodyID);
+void  swPhysBodySetUserData(int bodyID, void *userData);
+void  swPhysBodyApplyForce(int bodyID, swVec2 force,swPoint pos);
+void  swPhysBodyApplyForce1(int bodyID, float fx, float fy,float x,float y);
+void  swPhysBodySetLinearVelocity(int bodyID, swVec2 vel);
+void  swPhysBodySetLinearVelocity1(int bodyID, float x, float y);
+void  swPhysBodySetLinearVelocityY(int bodyID, float y);
+void  swPhysBodySetLinearVelocityX(int bodyID, float x);
+void  swPhysBodySetXForm(int bodyID, swVec2 pos,float rot);
+void  swPhysBodySetXForm1(int bodyID, float x, float y,float rot);
+void  swPhysBodySetBullet(int bodyID,bool isBullet);
+void  swPhysBodyWakeUp(int bodyID);
+void  swPhysBodyPutToSleep(int bodyID);
+ 
+//Query
+float swPhysBodyGetMass(int bodyID);
+bool  swPhysBodyIsBullet(int bodyID);
+bool  swPhysBodyIsStatic(int bodyID);
+bool  swPhysBodyIsDynamic(int bodyID);
+bool  swPhysBodyIsFrozen(int bodyID);
+bool  swPhysBodyIsSleeping(int bodyID);
+ 
+//Joints
+int  swPhysDistJointCreate(int bodyID1,swPoint anchor1,float bodyID2,swPoint anchor2,bool collideConneted);
+int  swPhysRevoJointCreate(int bodyID1,float bodyID2,swPoint anchor,
+                           float lowerAngle, float upperAngle, bool enableLimit, 
+                           float maxMotorTorque, float motorSpeed, bool enableMotor);
+ 
+int  swPhysPrisJointCreate(int bodyID1,float bodyID2,swPoint anchor,
+                           swPoint axis,float lowerTrans, float upperTrans, 
+                           bool enableLimit, float maxMotorForce, float motorSpeed, bool enableMotor);
+ 
+int  swPhysPullJointCreate(int bodyID1,float bodyID2,swPoint gAnchor1,swPoint gAnchor2,
+                           swPoint anchor1,swPoint anchor2, 
+                           float ratio,float maxLength1, float maxLength2);
+ 
+int  swPhysGearJointCreate(int bodyID1,float bodyID2,int joint1,int joint2,float ratio);
+void swPhysJointDestroy(int jointID);
+```
+
+### swMousBehaviour
+This api provides to listen mouse behaviour
+
+```c
+//Structure
+typedef struct _swMousBehaviourListener{
+  void (*pressed)(float,float);
+  void (*released)(float,float);
+  void (*dragging)(float,float);
+  void (*moving)(float,float);
+}swMousBehaviourListener;
+ 
+//Functions
+void  swMousBehaviourInit();
+void  swMousBehaviourDeInit();
+void  swMousBehaviourAdd(swMousBehaviourListener *listener);
+void  swMousBehaviourDel(swMousBehaviourListener *listener);
+void  swMousBehaviourExecute(swMouseState *mousState);
+```
+
+### swKeybBehaviour
+It's responsible to notify keyTyped. In textbox, console, etc.. we need to listen keyboard events and convert to Unicode. This class gives you typed char. So you can easily write your textbox or console app..
+
+```c
+//Structure
+typedef struct _swKeybBehaviourListener{
+   void (*typed)(char c);
+   void (*pressed)(swKeyEnum key);
+   void (*released)(swKeyEnum key);
+}swKeybBehaviourListener;
+ 
+//Functions
+void  swKeybBehaviourSetTypedSleepTime(float dTime);
+void  swKeybBehaviourAdd(swKeybBehaviourListener *listener);
+void  swKeybBehaviourDel(swKeybBehaviourListener *listener);
+void  swKeybBehaviourExecute(swKeyboardState *keybState);
+```
+
+### swDSL
+Domain Spesific Language
+
+```c
+//Functions
+void  swDSLRegisterCommand(void(*cmdFunc)(int,swArg *cArgs),char *cmdName,int count,swArg *cArgs);
+bool  swDSLExecuteCommand(char *fullCmd);
+```
+
+
+
 
