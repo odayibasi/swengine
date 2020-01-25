@@ -1,8 +1,6 @@
 # SWEngine
-========
+
   ![SWEngine Logo](/docs/images/swenginesdk.jpg)
-
-
 
 SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’s primary purpose is to allow developers high level access to game domains so they don’t need to learn lots of game development details..
 
