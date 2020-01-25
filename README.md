@@ -34,14 +34,14 @@ SWEngine is a next generation 2D Game API on Windows OS (XP, Vista) . The API’
 Consist of 7 parts
 
 * __SWTypes:__ Common data types defined ([swPoint](#swPoint), [swColor](#swColor), [swDimension](#swDimension), [swRect](#swrect), [swPolygon](#swPolygon), [swVec2](#swVect), [swArg](#swArg))
-* __SWUtil:__ Utility functions for games (swMath, swString, swLinkedList, swStack, swIntersection, swLogger, swTimer)
-* __SWCore:__ It's the core part of SWEngine. It contains basic functions for game development (swGraphics, swAudio, swInput, swSystem, swFileSystem, swImgBuffer)
-* __SWServices:__ It provides high level services for game mechanism (swDispManager, swExecManager, swInteractionManager, swPersistManager, swScheduledManager, swPhys, swMousBehaviour, swKeybBehaviour, swDSL)
-* __SWGame:__ Game component's behaviour controls (swAnimator, swLinker, swInterpolator, swValueModifier)
-* __SWGui:__ Gui components and functions (swNumPropWin, swConsole)
-* __SWEngine:__ Initialize and Setup application (swEngine, swApplication)
+* __SWUtil:__ Utility functions for games ([swMath](*swMath), [swString](*swString), [swLinkedList](*swLinkedList), [swStack](*swStack), [swIntersection](*swIntersection), [swLogger](*swLogger), [swTimer](*swTimer))
+* __SWCore:__ It's the core part of SWEngine. It contains basic functions for game development ([swGraphics](*swGraphics), [swAudio](*swAudio), [swInput](*swInput), [swSystem](*swSystem), [swFileSystem](*swFileSystem), [swImgBuffer](*swImgBuffer))
+* __SWServices:__ It provides high level services for game mechanism ([swDispManager](*swDispManager), [swExecManager](*swExecManager), [swInteractionManager](*swInteractionManager), [swPersistManager](*swPersistManager), [swScheduledManager](*swScheduledManager), [swPhys](*swPhys), [swMousBehaviour](*swMousBehaviour), [swKeybBehaviour](*swKeybBehaviour), [swDSL](*swDSL))
+* __SWGame:__ Game component's behaviour controls (swAnimator], [swLinker](*swLinker), [swInterpolator](*swInterpolator), [swValueModifier](*swValueModifier))
+* __SWGui:__ Gui components and functions ([swNumPropWin](*swNumPropWin), [swConsole](*swConsole))
+* __SWEngine:__ Initialize and Setup application ([swEngine](*swEngine), [swApplication](*swApplication))
 
-## swTypes
+## SWTypes
 
 ### swPoint
 It holds x,y coordinate. You could define location or coordinate of something.
@@ -552,7 +552,7 @@ typedef struct _swArg{
 ```
 
 
-## swUtil
+## SWUtil
 
 ### swMath
 Utility functions for math operations
@@ -960,7 +960,7 @@ void        swImgBufferGetPixel(int x,int y,swColor *color);
 ```
 
 
-## swServices
+## SWServices
 
 ### swDispManager
 In games, object display process is very important for performance utilization and display capability.
@@ -1162,7 +1162,7 @@ void  swDSLRegisterCommand(void(*cmdFunc)(int,swArg *cArgs),char *cmdName,int co
 bool  swDSLExecuteCommand(char *fullCmd);
 ```
 
-## swGame
+## SWGame
 
 ### swAnimator
 Animator api provides image transition with defined rule(mode and elapsed time).
@@ -1230,6 +1230,120 @@ void   swInterpolaterStart(int interpolaterID);
 float  swInterpolaterGetValue(int interpolaterID);
 ```
 
+
+### swValueModifier
+* Values: For example --> x,y,width,height,size,rot,color, etc.. base parameters.
+* Min, Max, Velocity, Accelaration..
+* Loop Type
+    * 01 mi Min->Max, Min->Max, Min->Max
+    * 10 mi Max->Min, Max->Min, Max->Min
+    * 010 mi Min->Max->Min->Max....
+
+```c
+//Functions
+typedef enum{
+   SW_VALUE_MODIFIER_01_LOOP,
+   SW_VALUE_MODIFIER_10_LOOP,
+   SW_VALUE_MODIFIER_010_LOOP,
+}swValueModifierMode;
+  
+int  swValueModifierCreate(swValueModifierMode mode,float *val,float begin,float end,float velocity,float acceleration);
+void swValueModifierDestroy(int modID);
+voi  swValueModifierExecute(int id,float dTime);
+```
+
+## SWGUI
+
+### swNumPropWin
+In tool development you need windowing system for modifying data structures. NumPropWin API provides util functions about bean-binding and dynamic window generation
+
+```c
+//Functions
+void swNumPropWinSetPath(char *path);
+int  swNumPropWinCreate(char *name,float x,float y,float w,int countVisbProp);
+int  swNumPropPointWinCreate(char *name,float x,float y,swPoint *point);
+int  swNumPropDimWinCreate(char *name,float x,float y,swDimension *dim);
+int  swNumPropRectWinCreate(char *name,float x,float y,swRect *rect);
+int  swNumPropColorWinCreate(char *name,float x,float y,swColor *color);
+void swNumPropWinDestroy(int winID);
+void swNumPropWinAddInt(int winID,char *name,int *iVal,int iMin,int iMax,int iInc);
+void swNumPropWinAddFloat(int winID,char *name,float *fVal,float fMin,float fMax,float fInc);
+void swNumPropWinAddDouble(int winID,char *name,double *dVal,double dMin,double dMax,double dInc);
+void swNumPropWinAddEnum(int winID,char *name,int *iVal,int enumStringList);
+void swNumPropWinAddSubWin(int winID,int subWinID);
+void swNumPropWinSetVisible(int winID,boolean bVisible);
+void swNumPropWinSetCollapse(int winID,boolean bCollapse);
+void swNumPropWinSetLocation(int winID,float x,float y);
+void swNumPropWinSetWidth(int winID,float width);
+void swNumPropWinSetVisibleProp(int winID,int visibleProp);
+```
+
+### swConsole
+```c
+//Functions
+
+void swConsoleInit();
+void swConsoleDeInit();
+void swConsoleSetFont(int fontID,int set,swColor *color,float size);
+void swConsoleSetBgColor(swColor *color);
+void swConsoleSetPos(float x,float y);
+void swConsoleSetLayer(int layer);
+void swConsoleSetSize(float w,float h);
+void swConsoleSetVisible(bool bVisible);
+void swConsolePrint(char *string,...);
+void swConsoleClear();
+```
+
+## SWEngine
+
+### swEngine
+The core game loop mechanism
+```c
+typedef struct{
+	void  (*appRun)(void);
+	int  width;
+	int  height;
+	bool fullScreen;
+	bool cursor;
+	char *title;
+	char *path;
+	HICON icon;
+	HINSTANCE hInstance;
+}swApplication;
+
+
+bool  swEngineInit(swApplication *app);
+void  swEngineRun();
+void  swEngineExit();
+```
+
+### swApplication
+```c
+//Structure
+typedef struct{
+   void  (*appRun)(void); //Callback function(Function pointer) which trigger all screen refresh. So you can write gameLoop logic here. 
+   int  width;  //Window width
+   int  height; //Window height
+   bool fullScreen; 
+   bool cursor; //Default Cursor'un is displayed
+   char *title; //Window title (Only displayed windowed mode)
+   char *path;  //Resource path
+   HINSTANCE hInstance;
+}swApplication;
+ 
+ 
+//Sample Usage
+//Application Settings
+swApplication simpleApplication;
+simpleApplication.hInstance=hInstance;
+simpleApplication.fullScreen=false;
+simpleApplication.cursor=true;
+simpleApplication.width=800;
+   simpleApplication.height=600;
+   simpleApplication.title="Simple Application";
+   simpleApplication.path="resource";
+   simpleApplication.appRun=GameLoop;
+```
 
 
 
