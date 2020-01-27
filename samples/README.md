@@ -3,7 +3,7 @@
   ![SWEngine Logo](/docs/images/swenginesdk.jpg)
 
 ## Topics
-  [SWAPI Engine Usages](#https://github.com/odayibasi/swengine)
+  [SWAPI Engine Usages](https://github.com/odayibasi/swengine)
 
 ### Basic Library Usage
 
