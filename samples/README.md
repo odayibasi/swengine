@@ -465,13 +465,45 @@ In 2D Games shadow creation is simple than 3D. The only thing you must do is ren
 ### Metaball
 It's an metaball implementation All process mades on CPU.
 
+![Metaball](/docs/images/samples/metaball0.jpg)
+![Metaball](/docs/images/samples/metaball1.jpg)
+
 ### Metaball2
+Previous example we tell glow effect. We prepare with photoshop and render on screen. Now we use two textures with animated opposite direction. When they overlapped a glow effect will create.
+
+![Metaball](/docs/images/samples/metaball2a.jpg)
+![Metaball](/docs/images/samples/metaball2b.jpg)
+![Metaball](/docs/images/samples/metaball2c.jpg)
+
 
 ### Metaball3
 
+I met this sample in GameDev forum. Finger tells how to create Metaballs on GPU with Texture. Link to Forum Thread.
+
+__Steps__
+* Create Rendering Target( 32 bit RGBA 800x600)
+* Set Blending Mode Additive
+* Set color alpha value 0.45
+* Render texture on rendering target
+* Enable Alpha Test glEnable(GL_ALPHA_TEST)
+* Set glAphaFunc(GL_GREATER,0.5) overlapped pixel.
+* Render result on framebuffer
+* At last you see. It'a very nice effect
+
+![Metaball](/docs/images/samples/metaball3a.jpg)
+![Metaball](/docs/images/samples/metaball3b.jpg)
+![Metaball](/docs/images/samples/metaball3c.jpg)
+
+
 ### Cloud FX with Perlin Noise
 
+After googling 2D Cloud rendering. I access Fluid Simulation and Perlin Noise tecnique. Below example shows you perlin tech on CPU Clouds With [Perlin Noise](#https://www.gamedev.net/tutorials/_/technical/game-programming/simple-clouds-part-1-r2085/)
+
 ### Particle System Editor
+We need particle engine for creation of xenophobic game special fx. I search on Google and access Haaf 2D Game Engine and it's particle editor. I download it's source and apply on SWEngine. I do'nt want to put this code in SWEngine because I couldn't create high quality effects yet. I work on..
+
+![Painting Spiral](/docs/images/samples/haafparticlesystem.jpg)
+
 
 ### Painting Spiral
 ![Painting Spiral](/docs/images/samples/paintspiral.jpg)
@@ -479,7 +511,27 @@ It's an metaball implementation All process mades on CPU.
 ## Games
 
 ### Snake
+Everyone knows snake game. It is very popular on phone. I try to develop on SWEngine. At first I design game
 ![Snake](/docs/images/samples/snake.jpg)
 
+__Game Design__
+1. Game area consist of 20x20 grid.
+2. Snake consist of nodes. Every nodes size equals grid size.
+3. Snake could move East,West,South,North direction.
+4. Snake moves to selected direction with constant speed.
+5. Snake speed will increase when snake takes bonus.
+6. Snake control pad is keyboard's Left,Right,Up,Down keys.
+7. Bonus increase player score.
+8. Snake nodes will increase when snake takes bonus.
+9. After bonus taken a new bonus will be created on random position.
+10. Snake will be die if it intersect boundary of game area or it's tail
+
+
+
 ### PaintBook
+PaintBook is an simple paint game. Paint picture with different color.
+
+1. First we need an image. I download a sample image from net.
+2. After that we process image and throw image data to color buffer (I wrote simple api for image processing SWImgBuffer)
+3. And at last implement a boundary fill algorithm for painting (Big picture this tech cause stack over flow exception)
 ![Paintbook](/docs/images/samples/paintbook.jpg)
