@@ -1,6 +1,7 @@
 # Samples
 
   ![SWEngine Logo](/docs/images/swenginesdk.jpg)
+  [SWAPI Engine Usages](#https://github.com/odayibasi/swengine)
 
 ## Topics
 
@@ -130,11 +131,15 @@ Sometimes we need to rotate primitives. We have two choice.
  * __First technique:__ We calculate edge points according to rotation value and give engine these calculated vertex values. This solution is a bit hard to use.
  * __Second technique:__ We set a rotation value when drawing primitives. SWEngine use this technique. This technique is easy and flexible. You could also give extra weight point for rotation. And SWEngine works with degrees. If you use radians you must convert degrees first. swMath api provides conversion functions between degrees and radians.  
 
+[CoreAPI_Rotation](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_Rotation)
+
 ![Rotation](/docs/images/samples/rotation.jpg)
 
 
 ### Transparency
 We succeed primitive drawing with color. Now we expand drawing capability and draw transparent objects. Transparent objects can be drawn using OpenGL blending function( glBlendFunc(SRC_FACTOR , DST_FACTOR) ). SRC_FACTOR and DST_FACTOR are predefined OpenGL constants used for blending operation. These can be constants like GL_ONE , GL_SRC_ALPHA etc.. look for your opengl guide for the complete list of this constants and their meanings. SWEngine graphics api provides an abstraction layer on OpenGL. So you don't need to learn OpenGL Blending functions.
+
+[CoreAPI_Transparency](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_Transparency)
 
 ![Transparency](/docs/images/samples/transparency.jpg)
 
@@ -144,12 +149,18 @@ Previous example we explain how to draw color and transparent primitives. But al
 
 Below example we attach movement with SWTimer. In game initialization we define timers.
 
+[CoreAPI_TimeDependentMovement](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_TimeDependentMovement)
+
+
 ![Time Dependent Movement](/docs/images/samples/transparency.jpg)
 
 
 ### Image Rendering
 
 Loading image files, bind OpenGL and set texture properties is'nt simple operations. SWEngine simplifies these operations and provides clear API for image rendering. It supports 24/32 bit TGA files
+
+[CoreAPI_ImageRendering](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_ImageRendering)
+
 
 ![Image Rendering](/docs/images/samples/imgrendering.jpg)
 
@@ -170,6 +181,9 @@ swMathSourceCalculate(&source,XGRID_SIZE,YGRID_SIZE,xIndex,yIndex);
 __Step 3:__ Selected cell/grid will be drawn to screen.
 swGraphicsRenderImg2(imgID,&target,&source);
 
+
+[CoreAPI_IconSetAccess](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_IconSetAccess)
+
 ![Image Clip](/docs/images/samples/imageclip.jpg)
 
 
@@ -179,6 +193,9 @@ Animated images are the most important part of 2D Game. All actor, vehicle and o
 
 _spriteID=swGraphicsCreateSprite("XenRunning\\");_
 
+[CoreAPI_SpriteRendering](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_SpriteRendering)
+
+
 ![Sprite Rendering](/docs/images/samples/spriteRendering.jpg)
 
 
@@ -187,6 +204,10 @@ In Forum Grinder asked me about how can we scroll texture on SWEngine. I show hi
 
 _void swGraphicsSetImgUVScrollable(int imgID,bool bEnabled); //Enable or Disable UVScrolling Capability_
 _void swGraphicsSetSpriteUVScrollable(int spriteID,bool bEnabled);_
+
+
+[CoreAPI_UVScrolling](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_UVScrolling)
+
 ![UV Scrolling](/docs/images/samples/uvscrolling.jpg)
 
 ### Text Rendering
@@ -194,6 +215,9 @@ _void swGraphicsSetSpriteUVScrollable(int spriteID,bool bEnabled);_
 In SWEngine text rendering operation is very simple. First you must define font types. Font data holds the characters in a texture. This texture consist of 256 character which placed in 16x16 grids.
 
 _fontID=swGraphicsCreateFont("Font.tga"); Rendering on screen swGraphicsRenderText(fontID,0,16,200,240,0,"string=%s int=%i float=%1.1f ","SkyWar",5,10.0f);_
+
+
+[CoreAPI_TextRendering](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_TextRendering)
 
 ![Text Rendering](/docs/images/samples/textrendering0.jpg)
 ![Text Rendering](/docs/images/samples/textrendering1.jpg)
@@ -205,6 +229,9 @@ This sample demonstrates how to use the OpenGL's ARB_point_sprite extensions to 
 
 SWEngine wraps upper tutorial codes in SWCore.dll. You can access the point sprite api from SWGraphics
 
+[CoreAPI_PointSpriteTest](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_PointSpriteTest)
+
+
 ![Point Sprite Rendering](/docs/images/samples/pointspriterendering.jpg)
 
 
@@ -212,10 +239,16 @@ SWEngine wraps upper tutorial codes in SWCore.dll. You can access the point spri
 
 In PC environment most important input device is keyboard This sample shows you how to listen keyboard keys.
 
+[CoreAPI_ListenKeyboard](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_ListenKeyboard)
+
+
 ### Listen Mouse
 
 This sample shows how to listen mouse motion and mouse buttons states.
 ![Listen Mouse](/docs/images/samples/listenmouse.jpg)
+
+[CoreAPI_ListenMouse](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_ListenMouse)
+
 
 ### Cursor
 How can we display cursor on Screen. How can we access cursor position
@@ -227,17 +260,23 @@ How can we display cursor on Screen. How can we access cursor position
 3. You can access mouse position on swMouseState in SWInput api
 
 
+[CoreAPI_DisplayCursor](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_DisplayCursor)
+
+
 ![Cursor](/docs/images/samples/cursor.jpg)
 
 ### Camera Control
 Similar to 3D games in 2D games need camera controls for move screen left,right,bottom and up directions. Platform games, side-scrolling shootem-up games and other games based on sliding screen different direction. SWEngine simplifies this operation with camera control functions.
 
-
+[CoreAPI_CameraControl](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_CameraControl)
 
 ![Camera Control](/docs/images/samples/camcontrol.jpg)
 
 ### Audio Play
 Loading sound and music files. Trigger them when needed. SWEngine api provides sound fuctions for sound management.
+
+
+[CoreAPI_AudioPlay](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_AudioPlay)
 
 
 ### GLSL
@@ -246,6 +285,8 @@ What's GLSL ? Briefly GLSL is an high level languange over graphics card. It pro
 #### Sample Usage
 GLSL code in SWEngine
 _diognalblur=swGraphicsCreateGLSLShader("fixed.vert","diognalblur.frag");_
+
+
 
 Pressing keyboard 1,2,3,4,5,6,7,8,9,0 keys actives different shaders.
 
@@ -261,6 +302,9 @@ Pressing keyboard 1,2,3,4,5,6,7,8,9,0 keys actives different shaders.
  * 9=Sampling Coord Ex
 
 I taked this shader examples from facewound web site. You can access shader details in this web site.
+
+[CoreAPI_GLSL](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_GLSL)
+
 
 ![GLSL Disabled](/docs/images/samples/glsl_disabled.jpg)
 ![GLSL DiognalBlur](/docs/images/samples/glsl_diognalblur.jpg)
@@ -288,16 +332,25 @@ In SWEngine
 Define a Rendering Target. Switch to framebuffer -->rendering target. Render screen. Switch to rendering target -->framebuffer, Use rendering target as a texture object, Apply effects and transformation on this.
 
 
+[CoreAPI_RenderingOnTexture](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_RenderingOnTexture)
+
+
 ![Rendering on Texture](/docs/images/samples/renderingontexture.jpg)
 
 
 ### Capture Screen Shot
 This sample shows how to capture screen.
 
+
+[CoreAPI_CaptureScreenShot](https://github.com/odayibasi/swengine/tree/master/samples/CoreAPI_CaptureScreenShot)
+
+
 ## Game Library Usage
 
 ### Animator
 In 2D games animated objects create by Sprite. But it's not adequate. You should also manage sprite image index. You listen timer and switch image index. The delay of switching operation defines animation speed. And end of sprite you want to return first image. Animator api develop for these purpose. Below example shows you how can animator api use.
+
+[GameAPI_AnimatorTest](https://github.com/odayibasi/swengine/tree/master/samples/GameAPI_AnimatorTest)
 
 
 ![Animator](/docs/images/samples/animator.jpg)
@@ -309,6 +362,9 @@ In Games motion will be define with speed, acceleration, torque etc.. But someti
 
 _interpID=swInterpolaterCreate(0,1,10);_
 
+[GameAPI_InterpolationAttrb](https://github.com/odayibasi/swengine/tree/master/samples/GameAPI_InterpolationAttrb)
+
+
 ### Loop Movement
 
 In games or scene demo coder want to repeat motion or behaviour. SWValueModifier api simplifies these operations.
@@ -318,6 +374,9 @@ __For example__
 * Changing alpha value 0-1 range..
 * Items rotation repeat
 * Items size scale repeat.
+
+[GameAPI_ValueModifier](https://github.com/odayibasi/swengine/tree/master/samples/GameAPI_ValueModifier)
+
 
 ## GUI Library Usage
 
@@ -332,9 +391,14 @@ __Features__
 * It provides to control paramerters value. You can inc/decr parameters normal and quickly.
 * Parameters changes directly reflect screen.
 
+[GuiAPI_PropertyWin](https://github.com/odayibasi/swengine/tree/master/samples/GuiAPI_PropertyWin)
+
+
 ![Num Propeperty Win](/docs/images/samples/numpropwin.jpg)
 
 ### Simple Console
+
+[GuiAPI_ConsoleApp](https://github.com/odayibasi/swengine/tree/master/samples/GuiAPI_ConsoleApp)
 
 ![Simple Console](/docs/images/samples/console.jpg)
 
@@ -353,6 +417,9 @@ void GameLoop(){
 ```
 Second tecnique. We give display responsibilities to one component and this component controls layer order. But why we need this component. Why don't we use first tecnique. In small application first tecnique can be used. But in a big game project lots object exist and these object rendering order is serious work. Displaying mechanism component provides this abstraction so you don't worry about ordering. You only set layer then do'nt think anything about displaying.
 
+[ServiceAPI_DispMechanism](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_DispMechanism)
+
+
 ![Display Manager](/docs/images/samples/displaymanager.jpg)
 
 ### Culling Operations
@@ -363,6 +430,9 @@ Below example shows how tu use culling function in SWEngine SWDispManager. 2500 
 __DispCullingSupport__
 
 _int swDispManagerAdd(void(*dispFunc)(void*), void *obj,boolean *bEnabled,swRect *rect,int *layer); //4th parameter rect=Boundary referance_
+
+[ServiceAPI_DispCullingSupport](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_DispCullingSupport)
+
 
 ![Culling](/docs/images/samples/culling.jpg)
 
@@ -375,6 +445,8 @@ void GameLoop(){
 }
 ```
 If you use SWDispManager service you don't check item visibility. Becouse it's item properties. swDispManager checks visibility. swDispManagerAdd(xenDisplay,xen,&xen->bVisible,NULL,NULL); //3rd parameter visibility referance pointer.
+
+[ServiceAPI_DispHowInvisible](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_DispHowInvisible)
 
 ![Hide Item](/docs/images/samples/hideitem.jpg)
 
@@ -400,25 +472,43 @@ __About Code__
 * Mirror
 * LOOP ...... I use SWInterpolater api for animated visual.
 
+[ServiceAPI_DispLayerSupport](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_DispLayerSupport)
+
 
 ### Simple Persist App
 In save operation for level editing or checkpoint, use below mechanism, SWPersistManager
 
+[ServiceAPI_SimplePersistApp](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_SimplePersistApp)
+
+
 ### Writing Application
+
+[ServiceAPI_WritingApp](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_WritingApp)
+
+
 ![Writing App](/docs/images/samples/writingapp.jpg)
 
 
 ### Physiscs World Application
+
+[ServiceAPI_PhysicWorld](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_PhysicWorld)
+
 
 ![Physics World App](/docs/images/samples/physworldapp.jpg)
 
 
 ### Physiscs World With Texture
 
+[ServiceAPI_PhysicsWorldWithTexture](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_PhysicsWorldWithTexture)
+
+
 ![Physics World Text](/docs/images/samples/physworldwithtexture.jpg)
 
 
 ### Physiscs World With Box2D Renderer 
+
+[ServiceAPI_PhysicsWorldWithBox2DRenderer](https://github.com/odayibasi/swengine/tree/master/samples/ServiceAPI_PhysicsWorldWithBox2DRenderer)
+
 
 ![Physiscs World With Box2D Renderer](/docs/images/samples/physworldwithbox2drenderer.jpg)
 
@@ -427,6 +517,10 @@ In save operation for level editing or checkpoint, use below mechanism, SWPersis
 ### Sierpinski Triangle
 I take this sample from Computer Graphics Using OpenGL. And you can take information from [wiki](#https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)
 
+[EXP_SierpinskiTriangleApp](https://github.com/odayibasi/swengine/tree/master/samples/EXP_SierpinskiTriangleApp)
+
+
+
 ![Sierpinski](/docs/images/samples/sierpinskitriangle.jpg)
 
 ### Simple Plots
@@ -434,6 +528,9 @@ I take this sample from Computer Graphics Using OpenGL. And you can take informa
 This applications shows you how to draw a function. High school math
 
 _f(x)=e-x.cos(PIx)_
+
+[EXP_SimplePlotApp](https://github.com/odayibasi/swengine/tree/master/samples/EXP_SimplePlotApp)
+
 ![Simple Plots](/docs/images/samples/simpleplots.jpg)
 
 
@@ -443,7 +540,12 @@ _f(x)=e-x.cos(PIx)_
 
 This sample shows how to create glow effects. In real it's difficult but we have a change 2D. We can use a hack solution. We prepare an image with glow effect by photoshop filter and then use in game. [Photoshop GlowFX](#http://www.idigitalemotion.com/tutorials/glow.html). The disadvantage of this solution more photoshop operation and this glow is valid only spesific image (In short it's static)
 
+[SFX_Glow](https://github.com/odayibasi/swengine/tree/master/samples/SFX_Glow)
+
+
 ![Glow](/docs/images/samples/glowfx.jpg)
+
+
 
 
 ### Shadow
@@ -453,10 +555,16 @@ In 2D Games shadow creation is simple than 3D. The only thing you must do is ren
 1. Sprite - (0,0,0,0.5) multiply color so the shadow color is halt transparent black color.
 2. Sprite - (x+20,y+20,w*2,h*2) Light direction effects shadow coordinate and size.
 
+[SFX_Shadow](https://github.com/odayibasi/swengine/tree/master/samples/SFX_Shadow)
+
+
 ![Shadow](/docs/images/samples/shadow.jpg)
 
 
 ### Fade In-Out
+
+[SFX_FadeInOut](https://github.com/odayibasi/swengine/tree/master/samples/SFX_FadeInOut)
+
 
 ![FadeIn](/docs/images/samples/fadefx.jpg)
 ![FadeOut](/docs/images/samples/fadefx1.jpg)
@@ -465,11 +573,17 @@ In 2D Games shadow creation is simple than 3D. The only thing you must do is ren
 ### Metaball
 It's an metaball implementation All process mades on CPU.
 
+
+[SFX_Metaballs](https://github.com/odayibasi/swengine/tree/master/samples/SFX_Metaballs)
+
 ![Metaball](/docs/images/samples/metaball0.jpg)
 ![Metaball](/docs/images/samples/metaball1.jpg)
 
 ### Metaball2
 Previous example we tell glow effect. We prepare with photoshop and render on screen. Now we use two textures with animated opposite direction. When they overlapped a glow effect will create.
+
+[SFX_Metaballs2](https://github.com/odayibasi/swengine/tree/master/samples/SFX_Metaballs2)
+
 
 ![Metaball](/docs/images/samples/metaball2a.jpg)
 ![Metaball](/docs/images/samples/metaball2b.jpg)
@@ -490,6 +604,9 @@ __Steps__
 * Render result on framebuffer
 * At last you see. It'a very nice effect
 
+[SFX_Metaballs3](https://github.com/odayibasi/swengine/tree/master/samples/SFX_Metaballs3)
+
+
 ![Metaball](/docs/images/samples/metaball3a.jpg)
 ![Metaball](/docs/images/samples/metaball3b.jpg)
 ![Metaball](/docs/images/samples/metaball3c.jpg)
@@ -499,19 +616,30 @@ __Steps__
 
 After googling 2D Cloud rendering. I access Fluid Simulation and Perlin Noise tecnique. Below example shows you perlin tech on CPU Clouds With [Perlin Noise](#https://www.gamedev.net/tutorials/_/technical/game-programming/simple-clouds-part-1-r2085/)
 
+
+
 ### Particle System Editor
 We need particle engine for creation of xenophobic game special fx. I search on Google and access Haaf 2D Game Engine and it's particle editor. I download it's source and apply on SWEngine. I do'nt want to put this code in SWEngine because I couldn't create high quality effects yet. I work on..
 
-![Painting Spiral](/docs/images/samples/haafparticlesystem.jpg)
+[SFX_HaafParticleSystem](https://github.com/odayibasi/swengine/tree/master/samples/SFX_HaafParticleSystem)
+
+![Particle System](/docs/images/samples/haafparticlesystem.jpg)
 
 
 ### Painting Spiral
+
+[EXP_PaintingSpiral](https://github.com/odayibasi/swengine/tree/master/samples/EXP_PaintingSpiral)
+
+
 ![Painting Spiral](/docs/images/samples/paintspiral.jpg)
 
 ## Games
 
 ### Snake
 Everyone knows snake game. It is very popular on phone. I try to develop on SWEngine. At first I design game
+
+
+
 ![Snake](/docs/images/samples/snake.jpg)
 
 __Game Design__
