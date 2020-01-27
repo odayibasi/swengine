@@ -218,89 +218,252 @@ This sample shows how to listen mouse motion and mouse buttons states.
 ![Listen Mouse](/docs/images/samples/listenmouse.jpg)
 
 ### Cursor
+How can we display cursor on Screen. How can we access cursor position
+
+1. In Game windows cursor create an ugly display. We should hide windows cursor visibility. Set cursor=false in SWApplication
+
+2. In Game we create our cursor. We define image or sprite cursor. And render to mouse position on screen.
+
+3. You can access mouse position on swMouseState in SWInput api
+
+
 ![Cursor](/docs/images/samples/cursor.jpg)
 
 ### Camera Control
+Similar to 3D games in 2D games need camera controls for move screen left,right,bottom and up directions. Platform games, side-scrolling shootem-up games and other games based on sliding screen different direction. SWEngine simplifies this operation with camera control functions.
+
+
+
 ![Camera Control](/docs/images/samples/camcontrol.jpg)
 
 ### Audio Play
+Loading sound and music files. Trigger them when needed. SWEngine api provides sound fuctions for sound management.
 
 
 ### GLSL
+What's GLSL ? Briefly GLSL is an high level languange over graphics card. It provides an abstraction layer on graphics card. If you want to use GLSL codes in your application. you must load, compile and bind to OpenGL. SWEngine simplifies these steps.
 
-![GLSL Bloom](/docs/images/samples/glsl_bloom.jpg)
-![GLSL DiognalBlur](/docs/images/samples/glsl_diognalblur.jpg)
+#### Sample Usage
+GLSL code in SWEngine
+_diognalblur=swGraphicsCreateGLSLShader("fixed.vert","diognalblur.frag");_
+
+Pressing keyboard 1,2,3,4,5,6,7,8,9,0 keys actives different shaders.
+
+ * 0=Disabled
+ * 1=Diognal Blur
+ * 2=Edge Detection
+ * 3=Emboss
+ * 4=Inverted
+ * 5=Bloom
+ * 6=Sharpen
+ * 7=Multiplier
+ * 8=Sampling Coord
+ * 9=Sampling Coord Ex
+
+I taked this shader examples from facewound web site. You can access shader details in this web site.
+
 ![GLSL Disabled](/docs/images/samples/glsl_disabled.jpg)
+![GLSL DiognalBlur](/docs/images/samples/glsl_diognalblur.jpg)
 ![GLSL Edge Detection](/docs/images/samples/glsl_edgedetection.jpg)
 ![GLSL Emboss](/docs/images/samples/glsl_emboss.jpg)
 ![GLSL Inverted](/docs/images/samples/glsl_inverted.jpg)
+![GLSL Bloom](/docs/images/samples/glsl_bloom.jpg)
+![GLSL Sharpen](/docs/images/samples/glsl_sharpen.jpg)
 ![GLSL Multiplier](/docs/images/samples/glsl_multiplier.jpg)
 ![GLSL Sampling Coord](/docs/images/samples/glsl_samplingcoord.jpg)
 
 ![GLSL Sampling Coord Extended](/docs/images/samples/glsl_samplingcoordex.jpg)
 
-![GLSL Sharpen](/docs/images/samples/glsl_sharpen.jpg)
 
 ### Rendering Target
 
+In default, OpenGL renders the output back color buffer in framework and every screen refresh, front and back buffer switch. So last updates displayed on screen. If we want to change rendering target. For example want to render on a texture. What you do.
+
+__OpenGL__
+* glCopyTexImage2D
+* PBuffer
+* FBO(Frame Buffer Object) SWEngine uses this technique
+
+In SWEngine
+Define a Rendering Target. Switch to framebuffer -->rendering target. Render screen. Switch to rendering target -->framebuffer, Use rendering target as a texture object, Apply effects and transformation on this.
+
+
+![Rendering on Texture](/docs/images/samples/renderingontexture.jpg)
 
 
 ### Capture Screen Shot
-
+This sample shows how to capture screen.
 
 ## Game Library Usage
 
 ### Animator
+In 2D games animated objects create by Sprite. But it's not adequate. You should also manage sprite image index. You listen timer and switch image index. The delay of switching operation defines animation speed. And end of sprite you want to return first image. Animator api develop for these purpose. Below example shows you how can animator api use.
+
+
+![Animator](/docs/images/samples/animator.jpg)
+
 
 ### Interpolator
 
+In Games motion will be define with speed, acceleration, torque etc.. But sometimes we don't want to calculate speed and acc. How can give motion another way. If we define start,end point and time. The objects automatic calculate it's speed. Interpolate. You can use this tecnique any type of value. For example alpha,x,y,width,height,rot, etc..)
+
+_interpID=swInterpolaterCreate(0,1,10);_
+
 ### Loop Movement
 
+In games or scene demo coder want to repeat motion or behaviour. SWValueModifier api simplifies these operations.
+
+__For example__
+* An item goes and comes between two place.
+* Changing alpha value 0-1 range..
+* Items rotation repeat
+* Items size scale repeat.
 
 ## GUI Library Usage
 
 ### Property Window
+SWPropertyWin= Bean Binding technique + Property Pane Widget
 
-### Simple Window
+In samples or tools we need to change parameters. But it's harder to make gui all of this parameters. I think about. How can I simplfy. Then I implement very lite windowing system. It only supports INT,FLOAT,DOUBLE,ENUM. And easy to use and code.
+
+__Features__
+* Drag-Drop, Expand/Collapse, Scrollable Windowing System.
+* You can easily bind parameters or add sub window to main window.
+* It provides to control paramerters value. You can inc/decr parameters normal and quickly.
+* Parameters changes directly reflect screen.
+
+![Num Propeperty Win](/docs/images/samples/numpropwin.jpg)
+
+### Simple Console
+
+![Simple Console](/docs/images/samples/console.jpg)
+
 
 ## Service Library Usage
 
 ### Display Mechanism
+First tecnique. Render objects front to back order. For example we make Breakout game. We write code similar below.
+
+```c
+void GameLoop(){
+        displayBricks()
+        displayBall()
+        displayPlayer()
+}
+```
+Second tecnique. We give display responsibilities to one component and this component controls layer order. But why we need this component. Why don't we use first tecnique. In small application first tecnique can be used. But in a big game project lots object exist and these object rendering order is serious work. Displaying mechanism component provides this abstraction so you don't worry about ordering. You only set layer then do'nt think anything about displaying.
+
+![Display Manager](/docs/images/samples/displaymanager.jpg)
 
 ### Culling Operations
+In one level 10 thousand item can be exist. If you will render all of them. It cause performance problem. The solution is filtering items which are outside screen(Culling). Basic you check item boundary in scenario region and if outside cull it. Boundary check for every item in your code is'nt good. SWEngine abstracts this function. You only set scenario region and item boundary. All checks and rendering operation makes in background.
+
+Below example shows how tu use culling function in SWEngine SWDispManager. 2500 item exist but only 45 item rendered.
+
+__DispCullingSupport__
+
+_int swDispManagerAdd(void(*dispFunc)(void*), void *obj,boolean *bEnabled,swRect *rect,int *layer); //4th parameter rect=Boundary referance_
+
+![Culling](/docs/images/samples/culling.jpg)
 
 ### Control Object Visibilities
+If you want to hide an item on screen. You should write similar to below code.
+```c
+void GameLoop(){
+     if(visible)
+         displayItem();
+}
+```
+If you use SWDispManager service you don't check item visibility. Becouse it's item properties. swDispManager checks visibility. swDispManagerAdd(xenDisplay,xen,&xen->bVisible,NULL,NULL); //3rd parameter visibility referance pointer.
+
+![Hide Item](/docs/images/samples/hideitem.jpg)
 
 ### Layer Mechanism
+In SWEngine there is no Z axis but have a layer mechanism.
+
+swDispManagerAdd(defenderDisplay,defender,NULL,NULL,&defender->layer); 5th parameters is item layer referance. You can configure your layer with changing layer properties. You can take an item front or back.
+
+Sample This example is extreme case. We walk defender around xen. In 3D it's simple operation. But in 2D you must make lot's of setting and calls
+
+__About Code__
+* In 3D define a path and move item on path.
+* In 2D this operation is a bit harder.
+* Create avoid and rotate sprite
+* Move with avoid animation in two coordinate. Go..
+* When defender access target point. Stop defender move and switch rotate animation
+* At the end of rotation mirror defender.
+* Resize defender. it will smaller when far away .
+* At the end of resize set layer 1.
+* Move defender to start point . (It will come back.)
+* Resize.
+* Rotate
+* Mirror
+* LOOP ...... I use SWInterpolater api for animated visual.
+
 
 ### Simple Persist App
+In save operation for level editing or checkpoint, use below mechanism, SWPersistManager
 
 ### Writing Application
+![Writing App](/docs/images/samples/writingapp.jpg)
+
 
 ### Physiscs World Application
 
+![Physics World App](/docs/images/samples/physworldapp.jpg)
+
+
 ### Physiscs World With Texture
+
+![Physics World Text](/docs/images/samples/physworldwithtexture.jpg)
+
 
 ### Physiscs World With Box2D Renderer 
 
+![Physiscs World With Box2D Renderer](/docs/images/samples/physworldwithbox2drenderer.jpg)
 
 ## Math & Physics
 
 ### Sierpinski Triangle
+I take this sample from Computer Graphics Using OpenGL. And you can take information from [wiki](#https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)
+
+![Sierpinski](/docs/images/samples/sierpinskitriangle.jpg)
 
 ### Simple Plots
 
+This applications shows you how to draw a function. High school math
+
+_f(x)=e-x.cos(PIx)_
+![Simple Plots](/docs/images/samples/simpleplots.jpg)
 
 
 ## Visual FX
 
 ### Glow
 
+This sample shows how to create glow effects. In real it's difficult but we have a change 2D. We can use a hack solution. We prepare an image with glow effect by photoshop filter and then use in game. [Photoshop GlowFX](#http://www.idigitalemotion.com/tutorials/glow.html). The disadvantage of this solution more photoshop operation and this glow is valid only spesific image (In short it's static)
+
+![Glow](/docs/images/samples/glowfx.jpg)
+
+
 ### Shadow
+
+In 2D Games shadow creation is simple than 3D. The only thing you must do is render the same objects with gray color and different orientation.
+
+1. Sprite - (0,0,0,0.5) multiply color so the shadow color is halt transparent black color.
+2. Sprite - (x+20,y+20,w*2,h*2) Light direction effects shadow coordinate and size.
+
+![Shadow](/docs/images/samples/shadow.jpg)
+
 
 ### Fade In-Out
 
+![FadeIn](/docs/images/samples/fadefx.jpg)
+![FadeOut](/docs/images/samples/fadefx1.jpg)
+
+
 ### Metaball
+It's an metaball implementation All process mades on CPU.
 
 ### Metaball2
 
